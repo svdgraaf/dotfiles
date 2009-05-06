@@ -1,0 +1,18 @@
+[user]
+  name = Stefan Borsje
+  email = mail@sborsje.nl
+[apply]
+  whitespace=fix
+[alias]
+  co = checkout
+  st = status
+  ci = commit
+  up = pull
+  br = branch
+  df = diff
+  lg = log -p
+[color]
+  ui = true
+  diff = auto
+  status = auto
+  branch = auto
