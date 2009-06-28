@@ -1,0 +1,4 @@
+require 'rubygems'
+require 'growl_glue'
+
+GrowlGlue::Autotest.initialize
