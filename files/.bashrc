@@ -76,6 +76,11 @@ function psg {
   ps aux | grep "$1"
 }
 
+# tarball
+function tgz {
+  tar cfz "$1.tar.gz" $1
+}
+
 # Awk shortcuts
 # Creates col1 .. col20
 for (( i = 0 ; i <= 20 ; i++ )); do alias "col$i"="awk '{print \$$i}'"; done
