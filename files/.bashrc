@@ -158,8 +158,7 @@ elif [ "$OS" = "linux" ] ; then
 fi
 
 # Projects autocompletion ------------------------------------------------------
-PROJECT_PARENT_DIRS[0]="$HOME/Projects/misc"
-PROJECT_PARENT_DIRS[1]="$HOME/Projects/finalist"
+PROJECT_PARENT_DIRS[0]="$HOME/Projects"
 for PARENT_DIR in ${PROJECT_PARENT_DIRS[@]} ; do
   if [ -d "$PARENT_DIR" ]; then
     for PROJECT_DIR in $(/bin/ls $PARENT_DIR); do
