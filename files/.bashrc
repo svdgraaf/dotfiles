@@ -121,6 +121,11 @@ alias h?="history | grep "
 # see http://blog.justingreer.com/post/45839440/a-tale-of-two-batteries
 alias battery='ioreg -w0 -l | grep Capacity | cut -d " " -f 17-50'
 
+# Attempt to create an easy to remember mirror alias by using wget with some
+# default options. Usage: mirror http://<site>, or when only interested in a
+# specific subdirectory: mirror -np http://<site>/<subdir>/
+if which wget &> /dev/null; then alias mirror='wget -m -nH -E -k -N'; fi
+
 # OS specific aliases/functions
 if [ "$OS" = "darwin" ] ; then
   function ssh_proxy {
