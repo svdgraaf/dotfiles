@@ -97,9 +97,9 @@ alias rdm='rake db:migrate'
 alias rdmt='rake db:migrate RAILS_ENV=test'
 
 # SSH
-if [ -f '~/.ssh/id_rsa.pub' ]; then
+if [ -f "$HOME/.ssh/id_rsa.pub" ]; then
   function add_ssh_key_to_host {
-    cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> ~/.ssh/authorized_keys'
+    cat $HOME/.ssh/id_rsa.pub | ssh $1 'cat >> ~/.ssh/authorized_keys'
   }
 fi
 
@@ -172,6 +172,9 @@ for PARENT_DIR in ${PROJECT_PARENT_DIRS[@]} ; do
       fi
       if [ -d "$PARENT_DIR/$PROJECT_DIR" ]; then
         alias "$PROJECT_DIR"="cd $PARENT_DIR/$PROJECT_DIR"
+        if [ -f "$PARENT_DIR/$PROJECT_DIR/config/boot.rb" ]; then
+          alias "dev$PROJECT_DIR"="rails_dev.sh $PARENT_DIR/$PROJECT_DIR"
+        fi
       fi
     done
   fi
