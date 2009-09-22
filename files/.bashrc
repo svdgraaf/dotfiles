@@ -88,13 +88,18 @@ for (( i = 0 ; i <= 20 ; i++ )); do alias "col$i"="awk '{print \$$i}'"; done
 # Ruby on Rails
 alias rp='touch tmp/restart.txt'
 alias devlog='tail -f log/development.log'
+alias testlog='tail -f log/test.log'
 alias sc='script/console'
 alias ss='script/server'
 alias jsc='jruby script/console'
 alias jss='jruby script/server'
 alias ri='ri -f ansi' # colored ri
+alias rsr='rake spec:rcov && open coverage/index.html'
 alias rdm='rake db:migrate'
 alias rdmt='rake db:migrate RAILS_ENV=test'
+alias rdmc='rake db:migrate RAILS_ENV=cucumber'
+alias cf='cucumber features'
+alias cft='cucumber features --tags'
 
 # SSH
 if [ -f "$HOME/.ssh/id_rsa.pub" ]; then

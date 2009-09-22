@@ -67,7 +67,7 @@ tell application "Terminal"
         activate
 
         -- Open new terminal window
-        tell application "System Events" to tell process "Terminal" to keystroke "n" using command down
+        -- tell application "System Events" to tell process "Terminal" to keystroke "n" using command down
 
         -- Maximize
         set bounds of the front window to {0, 0, displayWidth, displayHeight}
