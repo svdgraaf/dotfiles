@@ -162,6 +162,7 @@ if [ "$OS" = "darwin" ] ; then
       sudo port selfupdate
       sudo port upgrade installed
   }
+  alias irssi='ssh -t sborsje.nl screen -x'
 elif [ "$OS" = "linux" ] ; then
   alias ls='ls --color=always -A'
   alias dusort='du --max-depth=1 | sort -nr'
@@ -306,9 +307,9 @@ PROMPT_COMMAND=__prompt_command
 #PS1="\[${COLOR_GREEN}\]\u\[${COLOR_NC}\]@\[${COLOR_YELLOW}\]\h\[${COLOR_NC}\]:\[${COLOR_BLUE}\]\w\[${COLOR_NC}\]$ \[${COLOR_NC}\]"  # Primary prompt with user, host, and path 
 
 if [ "`id -u`" = "0" ]; then
-  export PS1='\[\e[0;31m\]\u\[\e[0m\]@\[\e[1;33m\]\h\[\e[0m\]\[\e[0;35m\]$__vcs_prefix\[\e[0m\]\[\e[0;34m\]${__vcs_base_dir}\[\e[0m\]\[\e[1;33m\]${__vcs_ref}\[\e[0m\]\[\e[0;34m\]${__vcs_sub_dir}\[\e[0m\]\$ '
+  export PS1='\[\e[0;31m\]\u\[\e[0m\]@\[\e[0;33m\]\h\[\e[0m\]\[\e[0;35m\]$__vcs_prefix\[\e[0m\]\[\e[0;34m\]${__vcs_base_dir}\[\e[0m\]\[\e[0;33m\]${__vcs_ref}\[\e[0m\]\[\e[0;34m\]${__vcs_sub_dir}\[\e[0m\]\$ '
 else
-  export PS1='\[\e[0;32m\]\u\[\e[0m\]@\[\e[1;33m\]\h\[\e[0m\]\[\e[0;35m\]$__vcs_prefix\[\e[0m\]\[\e[0;34m\]${__vcs_base_dir}\[\e[0m\]\[\e[1;33m\]${__vcs_ref}\[\e[0m\]\[\e[0;34m\]${__vcs_sub_dir}\[\e[0m\]\$ '
+  export PS1='\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;33m\]\h\[\e[0m\]\[\e[0;35m\]$__vcs_prefix\[\e[0m\]\[\e[0;34m\]${__vcs_base_dir}\[\e[0m\]\[\e[0;33m\]${__vcs_ref}\[\e[0m\]\[\e[0;34m\]${__vcs_sub_dir}\[\e[0m\]\$ '
 fi
 
 # Misc -------------------------------------------------------------------------

@@ -15,13 +15,6 @@ if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
 
-# Hello Messsage ---------------------------------------------------------------
-echo -e "${COLOR_GRAY}--------------------------------------------------------------------------------"
-echo -e "Kernel Information: " `uname -smr`
-echo -ne "Uptime: "; uptime
-echo -ne "Host time is: "; date
-echo -e "--------------------------------------------------------------------------------${COLOR_NC}"
-
 # Notes: -----------------------------------------------------------------------
 # When you start an interactive shell (log in, open terminal or iTerm in OS X,
 # or create a new tab in iTerm) the following files are read and run, in this order:
