@@ -97,9 +97,12 @@ alias ri='ri -f ansi' # colored ri
 alias rsr='rake spec:rcov && open coverage/index.html'
 alias rdm='rake db:migrate'
 alias rdmt='rake db:migrate RAILS_ENV=test'
-alias rdmc='rake db:migrate RAILS_ENV=cucumber'
-alias cf='cucumber features'
-alias cft='cucumber features --tags'
+alias csd='cap staging deploy'
+alias cpd='cap production deploy'
+alias find_outdated_gems='GEMS=`gem list`; for GEM in `rake gems RAILS_ENV=$RAILS_ENV | grep "\[ \]" | col4`; do echo ${GEMS} | grep -o "${GEM} ([0-9\.]\+)"; done;'
+alias gems='cd /opt/local/lib/ruby/gems/1.8/gems'
+alias flush_vim_swap='rm -f ~/.vim/tmp/swap/*'
+alias flush_vim_backup='rm -f ~/.vim/tmp/backup/*'
 
 # SSH
 if [ -f "$HOME/.ssh/id_rsa.pub" ]; then
@@ -156,6 +159,7 @@ if [ "$OS" = "darwin" ] ; then
   alias mysqlstatus='sudo /opt/local/bin/mysqladmin5 -u root -p status'
 
   # Misc
+  alias ducks='du -cks * | sort -nr'
   alias dusort='du -d 1 | sort -nr'
   if [ -f '/usr/libexec/locate.updatedb' ]; then alias updatedb='sudo /usr/libexec/locate.updatedb'; fi
   function macports_update {

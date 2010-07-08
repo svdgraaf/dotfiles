@@ -55,45 +55,6 @@ esac
 
 
 # Terminal.app version:
-## run the AppleScript
-#exec /usr/bin/osascript -; exit
-#
-#-- AppleScript starts here
-#set projectPath to system attribute "arg"
-#
-#set Dimensions to (do shell script "system_profiler SPDisplaysDataType | grep Resolution | awk '{print $2, $4}'")
-#set displayWidth to word 1 of Dimensions
-#set displayHeight to word 2 of Dimensions
-#
-#tell application "Terminal"
-#        activate
-#
-#        -- Open new terminal window
-#        -- tell application "System Events" to tell process "Terminal" to keystroke "n" using command down
-#
-#        -- Maximize
-#        set bounds of the front window to {0, 0, displayWidth, displayHeight}
-#
-#        -- autospec
-#        do script with command "cd " & projectPath & " && autospec" in selected tab of the front window
-#
-#        -- development log
-#        tell application "System Events" to tell process "Terminal" to keystroke "t" using command down
-#        delay 0.3
-#        do script with command "cd " & projectPath & " && tail -f log/development.log" in selected tab of the front window
-#
-#        -- script/console
-#        tell application "System Events" to tell process "Terminal" to keystroke "t" using command down
-#        delay 0.3
-#        do script with command "cd " & projectPath & " && script/console" in selected tab of the front window
-#
-#        -- MacVim
-#        tell application "System Events" to tell process "Terminal" to keystroke "t" using command down
-#        delay 0.3
-#        do script with command "cd " & projectPath & " && mvim" in selected tab of the front window
-#end tell
-
-# iTerm version:
 # run the AppleScript
 exec arch -i386 /usr/bin/osascript -; exit
 
@@ -104,41 +65,80 @@ set Dimensions to (do shell script "system_profiler SPDisplaysDataType | grep Re
 set displayWidth to word 1 of Dimensions
 set displayHeight to word 2 of Dimensions
 
-tell application "iTerm"
-  -- Maximize
-  set bounds of the front window to {0, 0, displayWidth, displayHeight}
+tell application "Terminal"
+        activate
 
-  tell the last terminal
+        -- Open new terminal window
+        -- tell application "System Events" to tell process "Terminal" to keystroke "n" using command down
 
-    -- development log
-    activate current session
-    tell the last session
-      set name to "dev log"
-      write text "cd " & projectPath
-      write text "tail -f log/development.log"
-    end tell
+        -- Maximize
+        -- set bounds of the front window to {0, 0, displayWidth, displayHeight}
 
-    -- autospec
-    launch session "Default Session"
-    tell the last session
-      set name to "rspec"
-      write text "cd " & projectPath
-      write text "autospec"
-    end tell
+        -- autospec
+        do script with command "cd " & projectPath & " && autospec" in selected tab of the front window
 
-    -- script/console
-    launch session "Default Session"
-    tell the last session
-      set name to "console"
-      write text "cd " & projectPath
-      write text "script/console"
-    end tell
+        -- development log
+        tell application "System Events" to tell process "Terminal" to keystroke "t" using command down
+        delay 0.3
+        do script with command "cd " & projectPath & " && tail -f log/development.log" in selected tab of the front window
 
-    -- MacVim
-    launch session "Default Session"
-    tell the last session
-      write text "cd " & projectPath
-      write text "mvim"
-    end tell
-  end tell
+        -- script/console
+        tell application "System Events" to tell process "Terminal" to keystroke "t" using command down
+        delay 0.3
+        do script with command "cd " & projectPath & " && script/console" in selected tab of the front window
+
+        -- MacVim
+        tell application "System Events" to tell process "Terminal" to keystroke "t" using command down
+        delay 0.3
+        do script with command "cd " & projectPath & " && rake log:clear && mvim" in selected tab of the front window
 end tell
+
+## iTerm version:
+## run the AppleScript
+#exec arch -i386 /usr/bin/osascript -; exit
+#
+#-- AppleScript starts here
+#set projectPath to system attribute "arg"
+#
+#set Dimensions to (do shell script "system_profiler SPDisplaysDataType | grep Resolution | awk '{print $2, $4}'")
+#set displayWidth to word 1 of Dimensions
+#set displayHeight to word 2 of Dimensions
+#
+#tell application "iTerm"
+#  -- Maximize
+#  set bounds of the front window to {0, 0, displayWidth, displayHeight}
+#
+#  tell the last terminal
+#
+#    -- development log
+#    activate current session
+#    tell the last session
+#      set name to "dev log"
+#      write text "cd " & projectPath
+#      write text "tail -f log/development.log"
+#    end tell
+#
+#    -- autospec
+#    launch session "Default Session"
+#    tell the last session
+#      set name to "rspec"
+#      write text "cd " & projectPath
+#      write text "autospec"
+#    end tell
+#
+#    -- script/console
+#    launch session "Default Session"
+#    tell the last session
+#      set name to "console"
+#      write text "cd " & projectPath
+#      write text "script/console"
+#    end tell
+#
+#    -- MacVim
+#    launch session "Default Session"
+#    tell the last session
+#      write text "cd " & projectPath
+#      write text "mvim"
+#    end tell
+#  end tell
+#end tell

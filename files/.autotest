@@ -1,4 +1,12 @@
+require 'autotest/fsevent'
 require 'rubygems'
 require 'growl_glue'
+
+# Don't run entire test suite when going from red to green
+class Autotest
+  def tainted
+    false
+  end
+end
 
 GrowlGlue::Autotest.initialize
