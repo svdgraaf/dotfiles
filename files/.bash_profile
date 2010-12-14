@@ -4,13 +4,15 @@ if [ -f ~/.dotfiles_lib/bash/detect_os.sh ]; then
 fi
 
 # Paths ------------------------------------------------------------------------
-export PATH=$PATH:~/.dotfiles_lib/bin
 
-# MacPorts
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export MANPATH=/opt/local/share/man:$MANPATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH:~/.dotfiles_lib/bin
+
+# RVM --------------------------------------------------------------------------
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Load .bashrc -----------------------------------------------------------------
+
 if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi

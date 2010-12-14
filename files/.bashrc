@@ -68,9 +68,6 @@ alias t500='tail -n 500'
 alias t1000='tail -n 1000'
 alias t2000='tail -n 2000'
 
-# ignore svn metadata - pipe this into xargs to do stuff
-alias no_svn="find . -path '*/.svn' -prune -o -type f -print"
-
 # grep for a process
 function psg {
   ps aux | grep "$1"
@@ -91,18 +88,25 @@ alias devlog='tail -f log/development.log'
 alias testlog='tail -f log/test.log'
 alias sc='script/console'
 alias ss='script/server'
-alias jsc='jruby script/console'
-alias jss='jruby script/server'
 alias ri='ri -f ansi' # colored ri
 alias rsr='rake spec:rcov && open coverage/index.html'
 alias rdm='rake db:migrate'
 alias rdmt='rake db:migrate RAILS_ENV=test'
 alias csd='cap staging deploy'
 alias cpd='cap production deploy'
-alias find_outdated_gems='GEMS=`gem list`; for GEM in `rake gems RAILS_ENV=$RAILS_ENV | grep "\[ \]" | col4`; do echo ${GEMS} | grep -o "${GEM} ([0-9\.]\+)"; done;'
-alias gems='cd /opt/local/lib/ruby/gems/1.8/gems'
+
+# rubygems shortcuts (http://stephencelis.com/archive/2008/6/bashfully-yours-gem-shortcuts)
+alias gems='cd $(gem env gemdir)/gems'
+
+gemdoc() {
+  local gems=($(gem env gemdir)/doc/$1*/rdoc/index.html)
+  open ${gems[@]: -1}
+}
+complete -W '$(`which ls` $(gem env gemdir)/doc)' gemdoc
+
 alias flush_vim_swap='rm -f ~/.vim/tmp/swap/*'
 alias flush_vim_backup='rm -f ~/.vim/tmp/backup/*'
+alias gitclear='git st | grep "Changed but not updated" -A 1000 | grep deleted | col3 | xargs git rm -f'
 
 # SSH
 if [ -f "$HOME/.ssh/id_rsa.pub" ]; then
@@ -110,17 +114,6 @@ if [ -f "$HOME/.ssh/id_rsa.pub" ]; then
     cat $HOME/.ssh/id_rsa.pub | ssh $1 'cat >> ~/.ssh/authorized_keys'
   }
 fi
-
-# Subversion
-alias sup='svn up'
-alias sst='svn st'
-alias sstu='svn st -u'
-alias sci='svn ci -m'
-alias sdiff='svn diff | colordiff'
-alias sadd="sst | grep '?' | col2 | xargs svn add"
-alias sdel="sst | grep '!' | col2 | xargs svn delete"
-alias sclean="sadd; sdel"
-alias srevert='svn st | col2 | xargs svn revert'
 
 # search in history
 alias h?="history | grep "
@@ -140,32 +133,19 @@ if [ "$OS" = "darwin" ] ; then
     ssh -t -D 8081 localhost "ssh -nNT -R 8080:127.0.0.1:8081 $1"
   }
 
-  # Attempt to use MacPorts findutils instead of defaults
+  # Attempt to use GNU findutils instead of defaults
   if which gsed &> /dev/null; then alias sed='gsed'; fi
   if which gfind &> /dev/null; then alias find='gfind'; fi
 
-  # Apache control
-  alias htstart='sudo /opt/local/apache2/bin/apachectl start'
-  alias htreload='sudo /opt/local/apache2/bin/apachectl graceful'
-  alias htrestart='sudo /opt/local/apache2/bin/apachectl restart'
-  alias htstop='sudo /opt/local/apache2/bin/apachectl stop'
-  alias htstatus='sudo /opt/local/apache2/bin/apachectl status'
-  alias htalog='tail -f /opt/local/apache2/logs/error_log'
-  alias htelog='tail -f /opt/local/apache2/logs/access_log'
-
-  # MySQL control
-  alias mysqlstart='sudo -b /opt/local/bin/mysqld_safe5'
-  alias mysqlstop='sudo /opt/local/bin/mysqladmin5 -u root -p shutdown'
-  alias mysqlstatus='sudo /opt/local/bin/mysqladmin5 -u root -p status'
+  # Nginx control
+  alias htstart='sudo nginx'
+  alias htreload='sudo nginx -s reload'
+  alias htstop='sudo nginx -s quit'
 
   # Misc
   alias ducks='du -cks * | sort -nr'
   alias dusort='du -d 1 | sort -nr'
   if [ -f '/usr/libexec/locate.updatedb' ]; then alias updatedb='sudo /usr/libexec/locate.updatedb'; fi
-  function macports_update {
-      sudo port selfupdate
-      sudo port upgrade installed
-  }
   alias irssi='ssh -t sborsje.nl screen -x'
 elif [ "$OS" = "linux" ] ; then
   alias ls='ls --color=always -A'
@@ -331,14 +311,3 @@ bind "set show-all-if-ambiguous On" # show list automatically, without double ta
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
-
-
-#function update_dotfiles {
-#    echo "* Updating .dotfiles project"
-#    svn update -q $HOME/.dotfiles
-#    echo "* Starting installer"
-#    $HOME/.dotfiles/install.rb
-#    echo "* Sourcing $HOME/.profile"
-#    source $HOME/.profile
-#    echo "* DONE!"
-#}
