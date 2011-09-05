@@ -97,19 +97,19 @@ set wildmenu " enhanced command-line completion
   " show matching braces
   set sm
   " colors
-  colorscheme ir_black
+  colorscheme molokai
   set background=dark
 
 " Directories """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
   " use backups
-  set backup
+  "set backup
 
   " put backupfiles in ~/.vim/tmp/backup
-  set backupdir=~/.vim/tmp/backup
+  "set backupdir=~/.vim/tmp/backup
 
   " put swapfiles in ~/.vim/tmp/swap
-  set directory=~/.vim/tmp/swap 
+  "set directory=~/.vim/tmp/swap 
 
 " Cursor Movement """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -238,14 +238,15 @@ set wildmenu " enhanced command-line completion
 " NERDTree """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
   " Shortkey
-  :noremap ,n :NERDTreeToggle<CR>
+  :noremap ,n :NERDTreeMirror<CR>
+  let NERDTreeShowHidden=1
   " Single click
   let NERDTreeMouseMode=3
 
   " Open NERDTree on start
-  "if has("gui_running")
-  "  autocmd VimEnter * exe 'NERDTree' | wincmd l
-  "endif
+  if has("gui_running")
+    autocmd VimEnter * exe 'NERDTree' | wincmd l
+  endif
 
 " MiniBufExpl """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
