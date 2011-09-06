@@ -48,13 +48,6 @@ export HISTIGNORE="ls:[bf]g:exit:l:sl:ll:llg"
 alias mv='mv -i'
 alias rm='rm -i'
 
-# alias ":" => "cd ../", "::" => "cd ../../", etc
-for (( i = 1 ; i <= 10 ; i++ )); do
-  dots=""; dirs="";
-  for (( j = 1 ; j <= $i ; j++ )); do dots="$dots"":"; dirs="$dirs""../"; done
-  alias "$dots"="cd $dirs"
-done
-
 # listing files
 alias sl='ls'
 alias l='ls -al'
