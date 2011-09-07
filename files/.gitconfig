@@ -1,8 +1,8 @@
 [user]
-	email = mail@sborsje.nl
-	name = Stefan Borsje
+	email = mail@svdgraaf.nl
+	name = Sander van de Graaf
 [core]
-  excludesfile = /Users/sborsje/.gitignore
+  excludesfile = /Users/svdgraaf/.gitignore
   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 [alias]
   co = checkout

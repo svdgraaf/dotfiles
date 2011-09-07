@@ -103,13 +103,13 @@ set wildmenu " enhanced command-line completion
 " Directories """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
   " use backups
-  "set backup
+  set backup
 
   " put backupfiles in ~/.vim/tmp/backup
-  "set backupdir=~/.vim/tmp/backup
+  set backupdir=~/.vim/tmp/backup
 
   " put swapfiles in ~/.vim/tmp/swap
-  "set directory=~/.vim/tmp/swap 
+  set directory=~/.vim/tmp/swap 
 
 " Cursor Movement """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
